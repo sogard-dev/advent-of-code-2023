@@ -8,14 +8,31 @@ internal class Day1Test {
 
     @Test
     fun testTaskOne() {
-        assertEquals("", task1(listOf()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals(
+            "142", task1(
+                """1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet""".lines()
+            )
+        )
+        assertEquals("54239", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2(listOf()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals(
+            "281", task2(
+                """two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen""".lines()
+            )
+        )
+        assertEquals("55343", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
