@@ -44,5 +44,4 @@ private fun parse(s: String): Game {
 }
 
 private data class Game(val gameId: Int, val sets: List<Cube>)
-
 private data class Cube(val blue: Int, val red: Int, val green: Int)

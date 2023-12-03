@@ -6,16 +6,27 @@ import kotlin.test.Test
 
 internal class Day3Test {
 
+    private val testInput = """467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...${'$'}.*....
+.664.598..""".lines()
+
     @Test
     fun testTaskOne() {
-        assertEquals("", task1(listOf()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("4361", task1(testInput))
+        assertEquals("535235", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2(listOf()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("467835", task2(testInput))
+        assertEquals("79844424", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
