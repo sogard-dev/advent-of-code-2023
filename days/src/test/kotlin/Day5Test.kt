@@ -6,16 +6,50 @@ import kotlin.test.Test
 
 internal class Day5Test {
 
+    val testInput = """seeds: 79 14 55 13
+            
+            seed-to-soil map:
+            50 98 2
+            52 50 48
+            
+            soil-to-fertilizer map:
+            0 15 37
+            37 52 2
+            39 0 15
+            
+            fertilizer-to-water map:
+            49 53 8
+            0 11 42
+            42 0 7
+            57 7 4
+            
+            water-to-light map:
+            88 18 7
+            18 25 70
+            
+            light-to-temperature map:
+            45 77 23
+            81 45 19
+            68 64 13
+            
+            temperature-to-humidity map:
+            0 69 1
+            1 0 69
+            
+            humidity-to-location map:
+            60 56 37
+            56 93 4""".lines()
+
     @Test
     fun testTaskOne() {
-        assertEquals("", task1(listOf()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("35", task1(testInput))
+        assertEquals("825516882", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2(listOf()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("46", task2(testInput))
+        assertEquals("136096660", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
