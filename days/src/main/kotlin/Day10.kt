@@ -1,6 +1,7 @@
 package day10
 
 import util.Graph
+import util.GraphNode
 import util.parseFromGrid
 
 fun task1(input: List<String>): String {
@@ -161,7 +162,7 @@ private fun parse(input: List<String>): Graph<Node> {
         })
 }
 
-private data class Node(val gridPos: Pair<Int, Int>, val pipe: Pipe) {
+private data class Node(val gridPos: Pair<Int, Int>, val pipe: Pipe) : GraphNode(gridPos.first, gridPos.second) {
     fun isWestOf(n2: Node) = gridPos.second == n2.gridPos.second - 1
     fun isEastOf(n2: Node) = gridPos.second == n2.gridPos.second + 1
     fun isNorthOf(n2: Node) = gridPos.first == n2.gridPos.first - 1
