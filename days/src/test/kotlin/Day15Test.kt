@@ -9,17 +9,17 @@ internal class Day15Test {
     
     @Test
     fun testTaskOne() {
-        assertEquals("", task1(listOf()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("1320", task1("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7".split(",")))
+        assertEquals("513172", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2(listOf()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("145", task2("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7".split(",")))
+        assertEquals("237806", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
-        return readPuzzle("day15")
+        return readPuzzle("day15")[0].split(",")
     }
 }
