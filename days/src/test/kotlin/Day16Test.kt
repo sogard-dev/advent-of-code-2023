@@ -6,17 +6,28 @@ import kotlin.test.Test
 
 
 internal class Day16Test {
-    
+
+    private val testInput = """.|...\....
+|.-.\.....
+.....|-...
+........|.
+..........
+.........\
+..../.\\..
+.-.-/..|..
+.|....-|.\
+..//.|....""".lines()
+
     @Test
     fun testTaskOne() {
-        assertEquals("", task1(listOf()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("46", task1(testInput))
+        assertEquals("7979", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2(listOf()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("51", task2(testInput))
+        assertEquals("8437", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
