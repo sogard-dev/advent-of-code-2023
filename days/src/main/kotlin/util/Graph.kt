@@ -55,15 +55,11 @@ data class Graph<N>(private val nodes: List<N>, private val connections: Map<N, 
 
     fun nodesWithVisitor(): Iterable<Pair<N, Visitor<N>>> {
         return nodes.map {
-            Pair(it, creatorVisitor(it))
+            Pair(it, getVisitor(it))
         }
     }
 
-    fun nodes(): Iterable<N> {
-        return nodes
-    }
-
-    private fun creatorVisitor(it: N) = object : Visitor<N> {
+    fun getVisitor(it: N) = object : Visitor<N> {
         override fun getUpNode(): N? {
             return connections[it]!!.find { f ->
                 f.c == it.c && f.r == it.r - 1
@@ -103,7 +99,11 @@ data class Graph<N>(private val nodes: List<N>, private val connections: Map<N, 
         }
     }
 
+    fun nodes(): Iterable<N> = nodes
+    fun connections(n: N) = connections[n]!!
     fun getHeight() = nodes.maxOf { it.r }
+    fun topLeftNode() = nodes.find { it.r == 0 && it.c == 0 }
+    fun bottomRightNode() = nodes.find { f -> f.r == nodes.maxOf { it.r } && f.c == nodes.maxOf { it.c } }
 }
 
 interface Visitor<N> where N : GraphNode {
@@ -113,4 +113,33 @@ interface Visitor<N> where N : GraphNode {
     fun getLeftNode(): N?
 }
 
-abstract class GraphNode(val r: Int, val c: Int)
+abstract class GraphNode(val r: Int, val c: Int) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as GraphNode
+
+        if (r != other.r) return false
+        if (c != other.c) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = r
+        result = 31 * result + c
+        return result
+    }
+}
+
+enum class Direction {
+    LEFT, RIGHT, UP, DOWN;
+
+    fun opposite() = when (this) {
+        LEFT -> RIGHT
+        RIGHT -> LEFT
+        UP -> DOWN
+        DOWN -> UP
+    }
+}
