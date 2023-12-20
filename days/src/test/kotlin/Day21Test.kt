@@ -1,11 +1,11 @@
-package day20
+package day21
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import util.readPuzzle
 import kotlin.test.Test
 
 
-internal class Day20Test {
+internal class Day21Test {
     
     @Test
     fun testTaskOne() {
@@ -20,6 +20,6 @@ internal class Day20Test {
     }
 
     private fun readThisPuzzle(): List<String> {
-        return readPuzzle("day20")
+        return readPuzzle("day21")
     }
 }
