@@ -1,13 +1,15 @@
 package util
 
 
-fun <N> parseFromGrid(input: List<String>, nodeCreator: (Int, Int, Char) -> N, nodeConnector: (N, N) -> Boolean): Graph<N>
+fun <N> parseFromGrid(input: List<String>, nodeCreator: (Int, Int, Char) -> N?, nodeConnector: (N, N) -> Boolean): Graph<N>
         where N : GraphNode {
     val nodes: MutableMap<Pair<Int, Int>, N> = mutableMapOf()
 
     input.withIndex().forEach { (r, line) ->
         line.withIndex().forEach { (c, v) ->
-            nodes[Pair(r, c)] = nodeCreator(r, c, v)
+            nodeCreator(r, c, v)?.let {
+                nodes[Pair(r, c)] = it
+            }
         }
     }
 
@@ -36,18 +38,19 @@ data class Graph<N>(private val nodes: List<N>, private val connections: Map<N, 
         return nodes.find(finder)
     }
 
-    fun bfs(startNode: N, cb: (N, Int) -> Unit) {
+    fun bfs(startNode: N, maxSteps: Int = 99999999, cb: (N, Int) -> Unit) {
         val openSet = ArrayDeque(listOf(Pair(0, startNode)))
         val closedSet = mutableSetOf(startNode)
 
         while (openSet.isNotEmpty()) {
             val (distance, node) = openSet.removeAt(0)
-            val thisConnections = connections[node]!!
-
-            for (n in thisConnections) {
-                if (closedSet.add(n)) {
-                    openSet.add(Pair(distance + 1, n))
-                    cb(n, distance + 1)
+            if (maxSteps >= distance + 1) {
+                val thisConnections = connections[node]!!
+                for (n in thisConnections) {
+                    if (closedSet.add(n)) {
+                        openSet.add(Pair(distance + 1, n))
+                        cb(n, distance + 1)
+                    }
                 }
             }
         }
