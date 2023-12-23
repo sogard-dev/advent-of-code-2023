@@ -39,17 +39,25 @@ data class Graph<N>(private val nodes: List<N>, private val connections: Map<N, 
     }
 
     fun bfs(startNode: N, maxSteps: Int = 99999999, cb: (N, Int) -> Unit) {
+        bfsUntil(startNode) { n, d ->
+            cb(n, d)
+            d < maxSteps
+        }
+    }
+
+    fun bfsUntil(startNode: N, cb: (N, Int) -> Boolean) {
         val openSet = ArrayDeque(listOf(Pair(0, startNode)))
         val closedSet = mutableSetOf(startNode)
 
         while (openSet.isNotEmpty()) {
             val (distance, node) = openSet.removeAt(0)
-            if (maxSteps >= distance + 1) {
-                val thisConnections = connections[node]!!
-                for (n in thisConnections) {
-                    if (closedSet.add(n)) {
-                        openSet.add(Pair(distance + 1, n))
-                        cb(n, distance + 1)
+            val thisConnections = connections[node]!!
+            for (n in thisConnections) {
+                if (closedSet.add(n)) {
+                    val newDistance = distance + 1
+                    if (cb(n, newDistance)) {
+                        openSet.add(Pair(newDistance, n))
+
                     }
                 }
             }
@@ -105,6 +113,7 @@ data class Graph<N>(private val nodes: List<N>, private val connections: Map<N, 
     fun nodes(): Iterable<N> = nodes
     fun connections(n: N) = connections[n]!!
     fun getHeight() = nodes.maxOf { it.r }
+    fun getWidth() = nodes.maxOf { it.c }
     fun topLeftNode() = nodes.find { it.r == 0 && it.c == 0 }
     fun bottomRightNode() = nodes.find { f -> f.r == nodes.maxOf { it.r } && f.c == nodes.maxOf { it.c } }
 }
@@ -114,9 +123,18 @@ interface Visitor<N> where N : GraphNode {
     fun getDownNode(): N?
     fun getRightNode(): N?
     fun getLeftNode(): N?
+    fun getAll(): List<N> {
+        return listOfNotNull(getUpNode(), getDownNode(), getLeftNode(), getRightNode())
+    }
 }
 
 abstract class GraphNode(val r: Int, val c: Int) {
+
+    fun isLeftOf(n2: GraphNode) = r == n2.r && c == n2.c - 1
+    fun isRightOf(n2: GraphNode) = r == n2.r && c == n2.c + 1
+    fun isAbove(n2: GraphNode) = r == n2.r - 1 && c == n2.c
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

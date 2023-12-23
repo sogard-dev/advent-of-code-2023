@@ -6,17 +6,41 @@ import kotlin.test.Test
 
 
 internal class Day23Test {
-    
+
+    private val testInput = """#.#####################
+#.......#########...###
+#######.#########.#.###
+###.....#.>.>.###.#.###
+###v#####.#v#.###.#.###
+###.>...#.#.#.....#...#
+###v###.#.#.#########.#
+###...#.#.#.......#...#
+#####.#.#.#######.#.###
+#.....#.#.#.......#...#
+#.#####.#.#.#########v#
+#.#...#...#...###...>.#
+#.#.#v#######v###.###v#
+#...#.>.#...>.>.#.###.#
+#####v#.#.###v#.#.###.#
+#.....#...#...#.#.#...#
+#.#########.###.#.#.###
+#...###...#...#...#.###
+###.###.#.###v#####v###
+#...#...#.#.>.>.#.>.###
+#.###.###.#.###.#.#v###
+#.....###...###...#...#
+#####################.#""".lines()
+
     @Test
     fun testTaskOne() {
-        assertEquals("", task1("""""".lines()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("94", task1(testInput))
+        assertEquals("2162", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2("""""".lines()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("154", task2(testInput))
+        assertEquals("6334", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
