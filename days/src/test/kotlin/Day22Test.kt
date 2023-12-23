@@ -6,17 +6,25 @@ import kotlin.test.Test
 
 
 internal class Day22Test {
-    
+
+    private val testInput = """1,0,1~1,2,1
+0,0,2~2,0,2
+0,2,3~2,2,3
+0,0,4~0,2,4
+2,0,5~2,2,5
+0,1,6~2,1,6
+1,1,8~1,1,9"""
+
     @Test
     fun testTaskOne() {
-        assertEquals("", task1("""""".lines()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("5", task1(testInput.lines()))
+        assertEquals("468", task1(readThisPuzzle()))
     }
 
     @Test
     fun testTaskTwo() {
-        assertEquals("", task2("""""".lines()))
-        assertEquals("", task2(readThisPuzzle()))
+        assertEquals("7", task2(testInput.lines()))
+        assertEquals("75358", task2(readThisPuzzle()))
     }
 
     private fun readThisPuzzle(): List<String> {
