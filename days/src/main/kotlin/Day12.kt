@@ -19,14 +19,14 @@ fun task2(input: List<String>): String {
 
 fun expand(s: String): String {
     val input = s.split(" ")[0]
-    val numbers = getNumbers(s.split(" ")[1]).joinToString(",")
+    val numbers = getNumbers(s.split(" ")[1]).map{it.toInt()}.joinToString(",")
 
     return "$input?$input?$input?$input?$input $numbers,$numbers,$numbers,$numbers,$numbers"
 }
 
 private fun solve(str: String): Long {
     val text = ".${str.split(" ")[0]}."
-    val numbers = getNumbers(str.split(" ")[1])
+    val numbers = getNumbers(str.split(" ")[1]).map{it.toInt()}
     val cache: MutableMap<Pair<Int, Int>, Long> = mutableMapOf()
 
     fun recurse(changeAt: Int, nextNumberIndex: Int): Long {

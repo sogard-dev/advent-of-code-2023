@@ -12,7 +12,7 @@ fun lcm(vararg numbers: Long): Long {
 
 fun getNumbers(s: String) =
     Regex("(-?\\d+)").findAll(s).map {
-        it.groups[1]!!.value.toInt()
+        it.groups[1]!!.value.toLong()
     }.toList()
 
 private fun gcd(x: Long, y: Long): Long {

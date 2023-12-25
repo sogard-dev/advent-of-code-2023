@@ -9,8 +9,7 @@ internal class Day25Test {
     
     @Test
     fun testTaskOne() {
-        assertEquals("", task1("""""".lines()))
-        assertEquals("", task1(readThisPuzzle()))
+        assertEquals("568214", task1(readThisPuzzle()))
     }
 
     @Test

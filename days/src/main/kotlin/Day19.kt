@@ -8,7 +8,7 @@ fun task1(input: List<String>): String {
 
     val wfs = parseToWorkflow(workflows)
     val items = itemsStr.map {
-        val (x, m, a, s) = getNumbers(it)
+        val (x, m, a, s) = getNumbers(it).map{it.toInt()}
         Item(x, m, a, s)
     }
 

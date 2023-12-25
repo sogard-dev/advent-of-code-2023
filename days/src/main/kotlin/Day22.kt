@@ -56,7 +56,7 @@ private fun parseAndDrop(input: List<String>): MutableList<Block> {
     println("Parsing")
 
     val blocks = input.withIndex().map { (i, v) ->
-        val l = getNumbers(v)
+        val l = getNumbers(v).map{it.toInt()}
         Block(i, l[0]..l[3], l[1]..l[4], l[2]..l[5])
     }
 

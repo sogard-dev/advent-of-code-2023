@@ -4,7 +4,7 @@ import util.getNumbers
 
 fun task1(input: List<String>): String {
     return input.sumOf { s ->
-        solve(getNumbers(s),
+        solve(getNumbers(s).map{it.toInt()},
             { it.last() },
             { l -> l.sum().toLong() })
     }.toString()
@@ -12,7 +12,7 @@ fun task1(input: List<String>): String {
 
 fun task2(input: List<String>): String {
     return input.sumOf { s ->
-        solve(getNumbers(s),
+        solve(getNumbers(s).map{it.toInt()},
             { it.first() },
             { l ->
                 var num = 0L
